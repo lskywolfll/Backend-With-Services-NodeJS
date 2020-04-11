@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/597e4290-44de-40e3-9047-1c616602cb6a/resourceGroups/LaVaca/providers/Microsoft.Web/sites/api-swagger",
+    "appService.deploySubpath": ""
+}

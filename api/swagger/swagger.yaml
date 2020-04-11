@@ -1,0 +1,236 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: lv-mc-event-mgnt
+  description: lavaca.cl Microservice for Events management
+host: localhost:3001
+basePath: /
+
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  # /veneu:
+  #   x-swagger-router-controller: veneu.controller
+  #   post:
+  #     description: Create new veneu
+  #     operationId: create
+  #     parameters:
+  #       - in: body
+  #         name: veneu
+  #         description: The veneu to create
+  #         schema:
+  #           $ref: "#/definitions/veneu"
+  #     responses:
+  #       "201":
+  #         description: CREATED
+  #         schema:
+  #           $ref: "#/definitions/createdVeneu"
+  #       "500":
+  #         description: INTERNAL_SERVER_ERROR
+  #         schema:
+  #           $ref: "#/definitions/internalServerError"
+
+  /asistant:
+    x-swagger-router-controller: asistant.controller
+    get:
+      description: Get all asistants
+      operationId: getAsistant
+      responses:
+        "200":
+          description: Obtained
+          schema:
+            $ref: "#/definitions/getAsistants"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          schema:
+            $ref: "#/definitions/internalServerError"
+    post:
+      description: Create new asistant
+      operationId: postAsistant
+      parameters:
+        - in: body
+          name: asistant
+          description: The asistant to create
+          required: true
+          schema:
+            $ref: "#/definitions/asistant"
+      responses:
+        "201":
+          description: CREATED
+          schema:
+            $ref: "#/definitions/asistant"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          schema:
+            $ref: "#/definitions/internalServerError"
+
+  /asistant/{idAsistant}:
+    x-swagger-router-controller: asistant.controller
+    get:
+      description: Get specified asistant
+      operationId: getAsistantId
+      parameters:
+        - in: path
+          name: idAsistant
+          type: integer
+          required: true
+          description: ID Númerico.
+      responses:
+        "200":
+          description: Obtained
+          schema:
+            $ref: "#/definitions/asistant"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          schema:
+            $ref: "#/definitions/internalServerError"
+    delete:
+      description: Delte specified asistant
+      operationId: deleteAsistantId
+      parameters:
+        - in: path
+          name: idAsistant
+          type: integer
+          required: true
+          description: ID Númerico.
+      responses:
+        "200":
+          description: Obtained
+          schema:
+            $ref: "#/definitions/asistant"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          schema:
+            $ref: "#/definitions/internalServerError"
+    put:
+      description: Update specified asistant
+      operationId: putAsistantId
+      parameters: 
+      - in: path
+        name: idAsistant
+        type: integer
+        required: true
+        description: ID Númerico.
+      - in: body
+        name: asistant
+        description: The asistant to update
+        required: true
+        schema:
+          $ref: "#/definitions/asistant"
+      responses:
+        "200":
+          description: Updated
+          schema: 
+            $ref: "#/definitions/asistant"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          schema:
+            $ref: "#/definitions/internalServerError"
+
+  /swagger:
+    x-swagger-pipe: swagger_raw
+
+# complex objects have schema definitions
+definitions:
+  #TRANSVERSAL OBJECTS
+
+  # address:
+  #   type: object
+  #   properties:
+  #     street:
+  #       description: "Like a 'Av Bernardo O'higgins"
+  #       type: string
+  #     zipcode:
+  #       description: "Postal code"
+  #       type: string
+  #     countrySubdivision:
+  #       description: "Like a 'Santiago' or 'Las condes'"
+  #       type: string
+
+  #REQUEST OBJECTS
+
+  # veneu:
+  #   type: object
+  #   properties:
+  #     name:
+  #       description: "The name of venue"
+  #       type: string
+  #     description:
+  #       description: "Venue description"
+  #       type: string
+  #     capacity:
+  #       description: "Max number of clients"
+  #       type: number
+  #     address:
+  #       $ref: "#/definitions/address"
+
+  asistant:
+    type: object
+    properties:
+      v_poa_id_asistant:
+        type: integer
+        example: 1
+      v_poa_firstname:
+        type: string
+        example: "Rene"
+      v_poa_lastname:
+        type: string
+        example: "Sanchez"
+      v_poa_email:
+        type: string
+        example: "rene.sanchez@hackmonkeys.cl"
+      v_poa_jobtitle:
+        type: string
+        example: "Developer"
+      v_poa_twitter:
+        type: string
+        example: "lReneNK"
+
+  # search:
+  #   type: object
+  #   properties:
+  #     id:
+  #       description: "id del campo que desea consultar"
+  #       type: number
+  #       example: "1"
+  #     vigencia:
+  #       description: "estado de la vigencia que desea consultar. 1 = vigente, 0 = no vigente"
+  #       type: number
+  #       example: "0"
+
+  #RESPONSE OBJECTS
+
+  # createdVeneu:
+  #   type: object
+  #   properties:
+  #     id:
+  #       type: string
+  #       pattern: '[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}'
+  #     imageReference:
+  #       type: string
+  #       pattern: "(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})"
+  getAsistants:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          $ref: "#/definitions/asistant"
+
+  #ERROR OBJECTS
+
+  internalServerError:
+    type: object
+    properties:
+      error:
+        type: object
+        properties:
+          code:
+            type: number
+          message:
+            type: string
