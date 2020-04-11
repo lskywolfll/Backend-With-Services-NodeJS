@@ -8,9 +8,6 @@ const nameController = '[Asistant Controller]';
 const url = require('url');
 
 const asistantService = require('../dao/asistant.dao');
-let blobAzureService = require('../dao/blobAzure.dao');
-let dateHelper = require('../helpers/date.helper');
-
 /************************BITACORA********************************
 * Creation Date	: 10/04/2020
 * Author		: René Sanchez

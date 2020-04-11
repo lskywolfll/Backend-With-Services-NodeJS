@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "0.0.1"
   title: lv-mc-event-mgnt
-  description: lavaca.cl Microservice for Events management
+  description: testing Microservice for Events management
 host: localhost:3001
 basePath: /
 
